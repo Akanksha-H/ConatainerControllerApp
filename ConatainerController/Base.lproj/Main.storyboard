@@ -20,27 +20,27 @@
                     </view>
                     <navigationItem key="navigationItem" id="U96-MX-i0N">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="am1-op-dES">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="eGb-RM-8z4">
                             <rect key="frame" x="128.5" y="5.5" width="157" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Summery"/>
-                                <segment title="Final"/>
+                                <segment title="Session"/>
                             </segments>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
-                        <outlet property="segmentControl" destination="am1-op-dES" id="ENG-mL-UHy"/>
+                        <outlet property="segmentedControl" destination="eGb-RM-8z4" id="09q-yB-bMm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="82.366071428571431"/>
         </scene>
-        <!--Summery View Controller-->
+        <!--Summary View Controller-->
         <scene sceneID="JJ0-JS-Shz">
             <objects>
-                <viewController storyboardIdentifier="summeryViewController" id="T1W-g0-Ab6" customClass="summeryViewController" customModule="ConatainerController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SummaryViewController" id="T1W-g0-Ab6" customClass="SummaryViewController" customModule="ConatainerController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Tr-jo-Hk4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="1625" y="82"/>
         </scene>
-        <!--Final View Controller-->
+        <!--Sessions View Controller-->
         <scene sceneID="oR6-yn-5S3">
             <objects>
-                <viewController storyboardIdentifier="FinalViewController" id="5rA-UF-XRx" customClass="FinalViewController" customModule="ConatainerController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SessionsViewController" id="5rA-UF-XRx" customClass="SessionsViewController" customModule="ConatainerController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="haI-4I-7jk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

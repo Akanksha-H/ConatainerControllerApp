@@ -9,53 +9,29 @@ import UIKit
 
 final class MasterViewController: UIViewController {
 
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         setupView()
     }
     
-    @objc private func selectionDidChange(_sender: UISegmentedControl){
-        updateViewConstraints()
-    }
-    
-    private func setSegmentCcontrol(){
-        segmentControl.removeAllSegments()
-        segmentControl.insertSegment(withTitle: "summeryViewController", at: 0, animated: true)
-        segmentControl.insertSegment(withTitle: "FinalViewController", at: 1, animated: true)
-        segmentControl.addTarget(self, action: #selector(selectionDidChange(_sender:)), for: .valueChanged)
-        
-        segmentControl.selectedSegmentIndex = 0
-    }
-    
-    //There are several ways we can instantiate the child view controllers. We can add lazy properties to the MasterViewController class or we can set the child view controllers up when the master view controller is initialized. Use lazy properties because it instantiates the child view controllers when they are needed. If the user never taps the Sessions segment of the segmented control, then there is no need to instantiate an instance of the SessionsViewController class.
-    
-    private lazy var summeryViewController: summeryViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "summeryViewController") as? summeryViewController else {
-            fatalError("Error loading summery")
-        }
-        
-        self.add(asChildViewController: viewController)
-        
-    return viewController
-    }()
-    
-    private lazy var finalViewController: FinalViewController = {
-        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        guard let viewController = storyBoard.instantiateViewController(withIdentifier: "FinalViewController") as? FinalViewController else {
-            fatalError("Error loading final")
-        }
-        
-        self.add(asChildViewController: viewController)
+    private func setupSegmentedControl() {
+        // Configure Segmented Control
+        segmentedControl.removeAllSegments()
+        segmentedControl.insertSegment(withTitle: "Summary", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Sessions", at: 1, animated: false)
+        segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
 
-        return viewController
-    }()
+        // Select First Segment
+        segmentedControl.selectedSegmentIndex = 0
+    }
+    
+    @objc private func selectionDidChange(_ sender: UISegmentedControl) {
+        updateView()
+    }
     
     private func add(asChildViewController viewController: UIViewController) {
         // Add Child View as Subview
@@ -69,7 +45,36 @@ final class MasterViewController: UIViewController {
             viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    private lazy var summaryViewController: SummaryViewController = {
+        // Load Storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 
+        // Instantiate View Controller
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController else {
+            fatalError("Unable to Instantiate Summary View Controller")
+        }
+
+        // Add View Controller as Child View Controller
+        self.add(asChildViewController: viewController)
+
+        return viewController
+    }()
+
+    private lazy var sessionsViewController: SessionsViewController = {
+        // Load Storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+        // Instantiate View Controller
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "SessionsViewController") as? SessionsViewController else {
+            fatalError("Unable to Instantiate Sessions View Controller")
+        }
+
+        // Add View Controller as Child View Controller
+        self.add(asChildViewController: viewController)
+
+        return viewController
+    }()
     
     private func remove(asChildViewController viewController: UIViewController) {
         // Notify Child View Controller
@@ -81,21 +86,20 @@ final class MasterViewController: UIViewController {
         // Notify Child View Controller
         viewController.removeFromParent()
     }
-    
+
     private func updateView() {
-        if segmentControl.selectedSegmentIndex == 0 {
-            remove(asChildViewController: finalViewController)
-            add(asChildViewController: summeryViewController)
+        if segmentedControl.selectedSegmentIndex == 0 {
+            remove(asChildViewController: sessionsViewController)
+            add(asChildViewController: summaryViewController)
         } else {
-            remove(asChildViewController: summeryViewController)
-            add(asChildViewController: finalViewController)
+            remove(asChildViewController: summaryViewController)
+            add(asChildViewController: sessionsViewController)
         }
     }
-
+    
     private func setupView() {
-        setSegmentCcontrol()
+        setupSegmentedControl()
        updateView()
     }
-
+    
 }
-
